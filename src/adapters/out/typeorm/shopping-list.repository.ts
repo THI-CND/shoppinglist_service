@@ -3,7 +3,9 @@ import { ShoppingList } from "src/domain/model/shopping-list.type";
 import { ShoppingListRepository } from "src/ports/out/shopping-list.repository";
 import { ShoppingListEntity } from "./entity/shopping-list.entity";
 import { Repository } from "typeorm";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class ShoppingListRepositoryImpl implements ShoppingListRepository {
 
     constructor(
