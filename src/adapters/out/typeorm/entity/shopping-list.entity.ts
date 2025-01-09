@@ -1,6 +1,7 @@
 import { ShoppingList } from "src/domain/model/shopping-list.type";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { QuantifiedIngredientEntity } from "./quantified-ingredient.entity";
+import { QuantifiedIngredient } from "src/domain/model/quantified-ingredient.type";
 
 @Entity()
 export class ShoppingListEntity {
@@ -60,12 +61,12 @@ export class ShoppingListEntity {
             changedRecipes: this.changedRecipes,
             totalIngredients: this.totalIngredients.map(
                 (totalIngredient) => {
-                    return totalIngredient.toQuantifiedIngredient();
+                    return new QuantifiedIngredientEntity(totalIngredient).toQuantifiedIngredient();
                 }
             ),
             purchasedIngredients: this.purchasedIngredients.map(
                 (purchasedIngredient) => {
-                    return purchasedIngredient.toQuantifiedIngredient();
+                    return new QuantifiedIngredientEntity(purchasedIngredient).toQuantifiedIngredient();
                 }
             ),
             finished: this.finished,

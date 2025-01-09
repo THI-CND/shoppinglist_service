@@ -9,12 +9,15 @@ export class QuantifiedIngredientEntity {
     @Column()
     quantity: number;
 
-    static fromQuantifiedIngredient(quantifiedIngredient: QuantifiedIngredient): QuantifiedIngredientEntity {
-        const entity = new QuantifiedIngredientEntity();
-        entity.ingredient = quantifiedIngredient.ingredient;
-        entity.quantity = quantifiedIngredient.quantity;
+    constructor(data?: Partial<QuantifiedIngredientEntity>) {
+        Object.assign(this, data);
+    }
 
-        return entity;
+    static fromQuantifiedIngredient(quantifiedIngredient: QuantifiedIngredient): QuantifiedIngredientEntity {
+        return new QuantifiedIngredientEntity({
+            ingredient: quantifiedIngredient.ingredient,
+            quantity: quantifiedIngredient.quantity,
+        });
     }
 
     toQuantifiedIngredient(): QuantifiedIngredient {

@@ -64,4 +64,13 @@ export class ShoppingListRepositoryImpl implements ShoppingListRepository {
             );
     }
 
+    exists(id: string): Promise<boolean> {
+        return this.shoppingListRepository
+            .exists({
+                where: {
+                    id: id,
+                }
+            });
+    }
+
 }

@@ -6,6 +6,9 @@ import { join } from 'path';
 import { ShoppingListRepositoryImpl } from './adapters/out/typeorm/shopping-list.repository';
 import { GrpcRecipeProvider } from './adapters/out/grpc/recipe.provider';
 import { ShoppingListEventsImpl } from './adapters/out/rabbimq/shopping-list.events';
+import { ShoppingListRestV1Controller } from './adapters/in/rest/rest-v1.controller';
+import { ShoppingListServiceImpl } from './application/shopping-list.service';
+import { RecipeServiceImpl } from './application/recipe.service';
 
 @Module({
   imports: [
@@ -43,11 +46,30 @@ import { ShoppingListEventsImpl } from './adapters/out/rabbimq/shopping-list.eve
       },
     ]),
   ],
-  controllers: [],
+  controllers: [
+    ShoppingListRestV1Controller,
+  ],
   providers: [
-    ShoppingListRepositoryImpl,
-    GrpcRecipeProvider,
-    ShoppingListEventsImpl,
+    {
+      provide: 'ShoppingListService',
+      useClass: ShoppingListServiceImpl,
+    },
+    {
+      provide: 'RecipeService',
+      useClass: RecipeServiceImpl,
+    },
+    {
+      provide: 'ShoppingListRepository',
+      useClass: ShoppingListRepositoryImpl,
+    },
+    {
+      provide: 'RecipeProvider',
+      useClass: GrpcRecipeProvider,
+    },
+    {
+      provide: 'ShoppingListEvents',
+      useClass: ShoppingListEventsImpl,
+    }
   ],
 })
 export class AppModule {}
