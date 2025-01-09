@@ -1,11 +1,11 @@
 import { QuantifiedIngredient } from "./quantified-ingredient.type";
 
 export class ShoppingList {
-    id: string;
+    id?: string;
     name: string;
     author: string;
     recipes: string[];
-    changed_recipes: string[];
+    changedRecipes: string[];
     totalIngredients: QuantifiedIngredient[];
     purchasedIngredients: QuantifiedIngredient[];
     finished: boolean;
