@@ -5,6 +5,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 import { ShoppingListRepositoryImpl } from './adapters/out/typeorm/shopping-list.repository';
 import { GrpcRecipeProvider } from './adapters/out/grpc/recipe.provider';
+import { ShoppingListEventsImpl } from './adapters/out/rabbimq/shopping-list.events';
 
 @Module({
   imports: [
@@ -33,13 +34,20 @@ import { GrpcRecipeProvider } from './adapters/out/grpc/recipe.provider';
           }
         },
       },
+      {
+        name: 'SHOPPING_LIST_EVENTS',
+        transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://localhost:5672'],
+        },
+      },
     ]),
   ],
-  controllers: [
-  ],
+  controllers: [],
   providers: [
     ShoppingListRepositoryImpl,
     GrpcRecipeProvider,
+    ShoppingListEventsImpl,
   ],
 })
 export class AppModule {}

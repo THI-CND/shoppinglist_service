@@ -6,7 +6,7 @@ import { RecipeProvider } from "src/ports/out/recipe.provider";
 @Injectable()
 export class GrpcRecipeProvider implements RecipeProvider, OnModuleInit {
 
-    private recipeService: any;
+    private recipeService;
 
     constructor(
         @Inject('RECIPE_SERVICE')
