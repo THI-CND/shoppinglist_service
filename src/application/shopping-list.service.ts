@@ -38,12 +38,14 @@ export class ShoppingListServiceImpl implements ShoppingListService {
             );
     }
 
-    updateShoppingList(shoppingList: ShoppingList): Promise<ShoppingList | undefined> {
+    updateShoppingList(id: string, shoppingList: ShoppingList): Promise<ShoppingList | undefined> {
         return this.shoppingListRepository
             .exists(shoppingList.id)
             .then(
                 (exists) => {
-                    if (exists)
+                    if (exists) {
+                        shoppingList.id = id;
+
                         return this.shoppingListRepository
                             .saveShoppingList(shoppingList)
                             .then(
@@ -52,6 +54,7 @@ export class ShoppingListServiceImpl implements ShoppingListService {
                                     return shoppingList;
                                 }
                             );
+                        }
 
                     return undefined;
                 }

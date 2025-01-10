@@ -1,7 +1,6 @@
 import { ShoppingList } from "src/domain/model/shopping-list.type";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { QuantifiedIngredientEntity } from "./quantified-ingredient.entity";
-import { QuantifiedIngredient } from "src/domain/model/quantified-ingredient.type";
 
 @Entity()
 export class ShoppingListEntity {

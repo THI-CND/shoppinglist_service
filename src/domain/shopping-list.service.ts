@@ -5,7 +5,7 @@ export interface ShoppingListService {
     getShoppingLists(): Promise<ShoppingList[]>;
     getShoppingList(id: string): Promise<ShoppingList | undefined>;
     createShoppingList(shoppingList: ShoppingList): Promise<ShoppingList>;
-    updateShoppingList(shoppingList: ShoppingList): Promise<ShoppingList | undefined>;
+    updateShoppingList(id: string, shoppingList: ShoppingList): Promise<ShoppingList | undefined>;
     deleteShoppingList(id: string): Promise<void>;
     addRecipeToShoppingList(shoppingListId: string, recipeId: string): Promise<ShoppingList | undefined>;
     removeRecipeFromShoppingList(shoppingListId: string, recipeId: string): Promise<ShoppingList | undefined>;
