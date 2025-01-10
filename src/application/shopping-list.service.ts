@@ -115,12 +115,15 @@ export class ShoppingListServiceImpl implements ShoppingListService {
             .then(
                 (shoppingList) => {
                     if (shoppingList) {
-                        shoppingList.recipes = shoppingList.recipes.filter(
-                            (id) => {
-                                return id !== recipeId;
-                            }
-                        );
-                        
+                        let index = shoppingList.recipes.indexOf(recipeId);
+
+                        if (index == -1)
+                            return undefined;
+
+                        shoppingList.recipes.splice(
+                            index, 1
+                        ); 
+
                         return this.recipeProvider
                             .getTotalIngredients(recipeId)
                             .then(
@@ -196,7 +199,7 @@ export class ShoppingListServiceImpl implements ShoppingListService {
                     if (shoppingList) {
                         shoppingList.purchasedIngredients = shoppingList.purchasedIngredients.filter(
                             (ingredient) => {
-                                return ingredient.ingredient !== purchasedIngredientId;
+                                return ingredient.ingredient != purchasedIngredientId;
                             }
                         );
 
