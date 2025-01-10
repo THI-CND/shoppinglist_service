@@ -17,7 +17,7 @@ export class ShoppingListEventsImpl implements ShoppingListEvents, OnModuleInit 
 
     shoppingListCreated(shoppingList: ShoppingList): void {
         this.client['channel'].publish(
-            'recipemanagement',
+            process.env.RABBIT_EXCHANGE || 'recipemanagement',
             'shoppinglist.created', 
             JSON.stringify(shoppingList),
         );
@@ -25,7 +25,7 @@ export class ShoppingListEventsImpl implements ShoppingListEvents, OnModuleInit 
 
     shoppingListUpdated(shoppingList: ShoppingList): void {
         this.client['channel'].publish(
-            'recipemanagement',
+            process.env.RABBIT_EXCHANGE || 'recipemanagement',
             'shoppinglist.updated', 
             JSON.stringify(shoppingList),
         );
@@ -33,7 +33,7 @@ export class ShoppingListEventsImpl implements ShoppingListEvents, OnModuleInit 
 
     shoppingListFinished(shoppingList: ShoppingList): void {
         this.client['channel'].publish(
-            'recipemanagement',
+            process.env.RABBIT_EXCHANGE || 'recipemanagement',
             'shoppinglist.finished', 
             JSON.stringify(shoppingList),
         );
@@ -41,7 +41,7 @@ export class ShoppingListEventsImpl implements ShoppingListEvents, OnModuleInit 
 
     shoppingListDeleted(id: string): void {
         this.client['channel'].publish(
-            'recipemanagement',
+            process.env.RABBIT_EXCHANGE || 'recipemanagement',
             'shoppinglist.deleted', 
             JSON.stringify(id),
         );
