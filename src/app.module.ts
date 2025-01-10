@@ -9,6 +9,7 @@ import { ShoppingListEventsImpl } from './adapters/out/rabbimq/shopping-list.eve
 import { ShoppingListRestV1Controller } from './adapters/in/rest/rest-v1.controller';
 import { ShoppingListServiceImpl } from './application/shopping-list.service';
 import { RecipeServiceImpl } from './application/recipe.service';
+import { ShoppingListRestV2Controller } from './adapters/in/rest/rest-v2.controller';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { RecipeServiceImpl } from './application/recipe.service';
   ],
   controllers: [
     ShoppingListRestV1Controller,
+    ShoppingListRestV2Controller,
   ],
   providers: [
     {
