@@ -31,19 +31,11 @@ export class ShoppingListEventsImpl implements ShoppingListEvents, OnModuleInit 
         );
     }
 
-    shoppingListFinished(shoppingList: ShoppingList): void {
-        this.client['channel'].publish(
-            process.env.RABBIT_EXCHANGE || 'recipemanagement',
-            'shoppinglist.finished', 
-            JSON.stringify(shoppingList),
-        );
-    }
-
     shoppingListDeleted(id: string): void {
         this.client['channel'].publish(
             process.env.RABBIT_EXCHANGE || 'recipemanagement',
             'shoppinglist.deleted', 
-            JSON.stringify(id),
+            JSON.stringify({id}),
         );
     }
 
