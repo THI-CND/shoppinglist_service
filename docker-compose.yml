@@ -15,3 +15,21 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+
+  shoppinglist:
+    image: ghcr.io/thi-cnd/shoppinglist_service:next
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_NAME: shoppinglist
+      RABBIT_URL: amqp://guest:guest@rabbitmq:5672
+      RECIPE_SERVICE_ADDRESS: localhost:9090
+      RABBIT_EXCHANGE: recipemanagement
+    depends_on:
+      - postgres
+      - rabbitmq
