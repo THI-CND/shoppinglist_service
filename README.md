@@ -46,10 +46,69 @@ Format: `amqp://<user>:<password>@<host>:<port>`
 ## Schnittstellen
 ### REST
 #### V1
-...
+##### GET `api/v1/shopping-list`
+Gibt alle Einkaufszettel zurück.
+Response:
+- Status: 200 OK
+- Body: `List<ShoppingListResponse>`
+
+##### GET `api/v1/shopping-list/{id}`
+Gibt die Einkaufsliste mit der ID `id` zurück.
+Response:
+- Status: 200 OK
+- Body: `ShoppingListResponse`
+
+##### POST `api/v1/shopping-list`
+Erstellt eine neue Einkaufsliste.
+Request:
+- Body: `ShoppingListCreateRequest`
+- Status: 200 OK
+- Body: `ShoppingListResponse`
+
+##### PUT `api/v1/shopping-list/{id}`
+Aktualisiert die Einkaufsliste mit der ID `id`.
+Request:
+- Body: `ShoppingListUpdateRequest`
+- Status: 200 OK
+- Body: `ShoppingListResponse`
+
+##### DELETE `api/v1/shopping-list/{id}`
+Löscht die Einkaufsliste mit der ID `id`.
+Response:
+- Status: 200 OK
 
 #### V2
-...
+##### PATCH `api/v2/shopping-list/{id}/recipe`
+Fügt ein neues Rezept zur Einkaufsliste mit der ID `id` hinzu.
+Request:
+- Body: `RecipeRequest`
+- Status: 200 OK
+- Body: `ShoppingListResponse`
+
+##### DELETE `api/v2/shopping-list/{id}/recipe/{recipeId}`
+Löscht das Rezept mit der ID `recipeId` aus der Einkaufsliste mit der ID `id`.
+Response:
+- Status: 200 OK
+- Body: `ShoppingListResponse`
+
+##### PATCH `api/v2/shopping-list/{id}/purchased-ingredient`
+Fügt eine neue gekaufte Zutat zur Einkaufsliste mit der ID `id` hinzu.
+Request:
+- Body: `QuantifiedIngredientRequest`
+- Status: 200 OK
+- Body: `ShoppingListResponse`
+
+##### DELETE `api/v2/shopping-list/{id}/purchased-ingredient/{ingredientId}`
+Löscht die eingekaufte Zutat mit der ID `ingredientId` aus der Einkaufsliste mit der ID `id`.
+Response:
+- Status: 200 OK
+- Body: `ShoppingListResponse`
+
+##### PUT `api/v2/shopping-list/{id}/total-ingredients`
+Aktualisiert die gesamten einzukaufenden Zutaten der Einkaufsliste mit der ID `id`.
+Response:
+- Status: 200 OK
+- Body: `ShoppingListResponse`
 
 ### gRPC
 ```proto
@@ -100,6 +159,66 @@ Wird gesendet, wenn eine Einkaufsliste gelöscht wurde.\
 Payload: `ShoppingListDeletedEvent`
 
 ## Datenmodell
+### ShoppingListResponse
+```json
+{
+  "id": "string",
+  "name": "string",
+  "author": "string",
+  "recipes": [
+    "string"
+  ],
+  "changedRecipes": [
+    "string"
+  ],
+  "totalIngredients": [
+    {
+      "recipe": 0,
+      "quantity": 0
+    }
+  ],
+  "purchasedIngredients": [
+    {
+      "recipe": 0,
+      "quantity": 0
+    }
+  ],
+  "finished": false
+}
+```
+
+### ShoppingListCreateRequest
+```json
+{
+  "name": "string",
+  "author": "string"
+}
+```
+
+### ShoppingListUpdateRequest
+```json
+{
+  "name": "string",
+  "author": "string",
+  "finished": false
+}
+```
+
+### RecipeRequest
+```json
+{
+  "id": "string"
+}
+```
+
+### QuantifiedIngredientRequest
+```json
+{
+  "ingredient": 0,
+  "quantity": 0
+}
+```
+
 ### `ShoppingListEvent`
 ```json
 {
