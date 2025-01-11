@@ -1,4 +1,4 @@
-import { ShoppingList } from "src/domain/model/shopping-list.type";
+import { ShoppingList } from "../../../../domain/model/shopping-list.type";
 
 export class ShoppingListCreateRequest {
     name: string;
