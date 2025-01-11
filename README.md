@@ -52,7 +52,39 @@ Format: `amqp://<user>:<password>@<host>:<port>`
 ...
 
 ### gRPC
-...
+```proto
+syntax = "proto3";
+
+package de.benedikt_schwering.thicnd.stubs;
+
+option java_multiple_files = true;
+option java_package = "de.benedikt_schwering.thicnd.stubs";
+
+service ShoppingListService {
+  rpc UpdateTotalIngredientsInShoppingList (ShoppingListIdRequest) returns (ShoppingListResponse);
+}
+
+message ShoppingListIdRequest {
+  string id = 1;
+}
+
+message ShoppingListResponse {
+  string id = 1;
+  string name = 2;
+  string author = 3;
+  string description = 4;
+  repeated string recipes = 5;
+  repeated string changedRecipes = 6;
+  repeated QuantifiedIngredientResponse totalIngredients = 7;
+  repeated QuantifiedIngredientResponse purchasedIngredients = 8;
+  bool finished = 9;
+}
+
+message QuantifiedIngredientResponse {
+  int64 ingredient = 1;
+  double quantity = 2;
+}
+```
 
 ## Events
 ### `shoppinglist.created`
