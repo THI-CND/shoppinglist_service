@@ -21,6 +21,7 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
+      - "9009:9009"
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
