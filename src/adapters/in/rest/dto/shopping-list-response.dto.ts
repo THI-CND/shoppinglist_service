@@ -1,4 +1,4 @@
-import { ShoppingList } from "src/domain/model/shopping-list.type";
+import { ShoppingList } from "../../../../domain/model/shopping-list.type";
 import { QuantifiedIngredientResponse } from "./quantified-ingredient-response.dto";
 
 export class ShoppingListResponse {

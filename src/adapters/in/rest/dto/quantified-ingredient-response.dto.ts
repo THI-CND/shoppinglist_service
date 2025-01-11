@@ -1,4 +1,4 @@
-import { QuantifiedIngredient } from "src/domain/model/quantified-ingredient.type";
+import { QuantifiedIngredient } from "../../../../domain/model/quantified-ingredient.type";
 
 export class QuantifiedIngredientResponse {
     ingredient: number;
