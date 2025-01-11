@@ -12,6 +12,7 @@ import { RecipeServiceImpl } from './application/recipe.service';
 import { ShoppingListRestV2Controller } from './adapters/in/rest/rest-v2.controller';
 import { ConfigModule } from '@nestjs/config';
 import { RecipeEventSubscriber } from './adapters/in/rabbitmq/recipe-event.subscriber';
+import { ShoppingListServiceGRPCController } from './adapters/in/grpc/grpc-service.controller';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { RecipeEventSubscriber } from './adapters/in/rabbitmq/recipe-event.subsc
   controllers: [
     ShoppingListRestV1Controller,
     ShoppingListRestV2Controller,
+    ShoppingListServiceGRPCController,
   ],
   providers: [
     RecipeEventSubscriber,
