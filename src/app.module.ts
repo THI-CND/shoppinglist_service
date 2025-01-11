@@ -11,6 +11,7 @@ import { ShoppingListServiceImpl } from './application/shopping-list.service';
 import { RecipeServiceImpl } from './application/recipe.service';
 import { ShoppingListRestV2Controller } from './adapters/in/rest/rest-v2.controller';
 import { ConfigModule } from '@nestjs/config';
+import { RecipeEventSubscriber } from './adapters/in/rabbitmq/recipe-event.subscriber';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { ConfigModule } from '@nestjs/config';
         transport: Transport.RMQ,
         options: {
           urls: [process.env.RABBIT_URL || 'amqp://localhost:5672'],
+          queue: 'shopping-list-events',
         },
       },
       {
@@ -54,6 +56,7 @@ import { ConfigModule } from '@nestjs/config';
     ShoppingListRestV2Controller,
   ],
   providers: [
+    RecipeEventSubscriber,
     {
       provide: 'ShoppingListService',
       useClass: ShoppingListServiceImpl,
@@ -73,7 +76,7 @@ import { ConfigModule } from '@nestjs/config';
     {
       provide: 'ShoppingListEvents',
       useClass: ShoppingListEventsImpl,
-    }
+    },
   ],
 })
 export class AppModule {}
