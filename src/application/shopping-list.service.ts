@@ -242,6 +242,7 @@ export class ShoppingListServiceImpl implements ShoppingListService {
                             nestedTotalIngredients.push(await this.recipeProvider.getTotalIngredients(recipeId));
 
                         shoppingList.totalIngredients = this.flattenAndSumIngredients(nestedTotalIngredients);
+                        shoppingList.changedRecipes = [];
 
                         return this.shoppingListRepository
                             .saveShoppingList(shoppingList)
@@ -256,6 +257,24 @@ export class ShoppingListServiceImpl implements ShoppingListService {
                     return undefined;
                 }
             )
+    }
+
+    async handleRecipeUpdatedInShoppingLists(recipeId: string): Promise<void> {
+        let shoppingLists = await this.shoppingListRepository.getShoppingLists();
+
+        for (let shoppingList of shoppingLists) {
+            if (shoppingList.recipes.includes(recipeId)) {
+                shoppingList.changedRecipes.push(recipeId);
+
+                this.shoppingListRepository
+                    .saveShoppingList(shoppingList)
+                    .then(
+                        (shoppingList) => {
+                            this.shoppingListEvents.shoppingListUpdated(shoppingList);
+                        }
+                    );
+            }
+        }
     }
 
 }

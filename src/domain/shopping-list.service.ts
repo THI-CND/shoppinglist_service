@@ -12,4 +12,5 @@ export interface ShoppingListService {
     addPurchasedIngredientToShoppingList(shoppingListId: string, purchasedIngredient: QuantifiedIngredient): Promise<ShoppingList | undefined>;
     removePurchasedIngredientFromShoppingList(shoppingListId: string, purchasedIngredientId: number): Promise<ShoppingList | undefined>;
     updateTotalIngredientsInShoppingList(shoppingListId: string): Promise<ShoppingList | undefined>;
+    handleRecipeUpdatedInShoppingLists(recipeId: string): Promise<void>;
 }
