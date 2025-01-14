@@ -9,6 +9,7 @@ RUN npm install
 
 COPY tsconfig.json .
 COPY tsconfig.build.json .
+COPY nest-cli.json .
 COPY src/ src/
 
 RUN npm run build
@@ -22,4 +23,4 @@ COPY --from=build /app/dist/ dist/
 
 EXPOSE 3000
 
-ENTRYPOINT [ "node", "dist/main.js" ]
+# ENTRYPOINT [ "node", "dist/main.js" ]
