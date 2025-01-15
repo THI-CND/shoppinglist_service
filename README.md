@@ -3,6 +3,9 @@ Der Shopping List Service verwaltet Einkaufslisten, welche aus einzelnen Rezepte
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=THI-CND_shoppinglist_service&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=THI-CND_shoppinglist_service)
 
+## Architektur
+![Architekturdiagramm](docs/shopping-list-service-architecture.drawio.png)
+
 ## Getting Started
 ### Abhängigkeiten
 Um das Projekt lokal zu starten, müssen die folgenden Abhängigkeiten installiert werden:
